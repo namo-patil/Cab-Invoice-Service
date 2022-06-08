@@ -7,6 +7,7 @@ public class InvoiceGenerator {
     private static final double MINIMUM_COST_PER_KILOMETER = 10;
     private static final int COST_PER_MINUTE = 1;
     private static final double MINIMUM_FARE = 5;
+
     Map<String, Ride[]> map = new HashMap<>();
 
     public double calculateFare(double distance, int time) {
@@ -29,6 +30,12 @@ public class InvoiceGenerator {
     public InvoiceSummary getInvoiceService(String userId) {
         Ride[] ride = map.get(userId);
         InvoiceSummary invoiceSummary = new InvoiceGenerator().calculateFare(ride);
+        return invoiceSummary;
+    }
+
+    public InvoiceSummary getInvoiceServiceByCategory(String userId) {
+        Ride[] ride = map.get(userId);
+        InvoiceSummary invoiceSummary = RideCategory.PREMIUM_RIDE.calculateFare(ride);
         return invoiceSummary;
     }
 }
